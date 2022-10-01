@@ -2,7 +2,11 @@ import Joi from "joi";
 const validator = (schema) => (payload) => schema.validate(payload);
 
 const categoriesSchema = Joi.object({
-  name: Joi.string().trim().min(1).required(),
+  name: Joi.string().min(1).empty().required().messages({
+    "string.min": "Name should be min 1 character",
+    "string.empty": "Name cannot be an empty field",
+    "any.required": "Name is required",
+  }),
 });
 
 const customersSchema = Joi.object({
@@ -34,28 +38,30 @@ const gamesSchema = Joi.object({
   }),
   image: Joi.string()
     .required()
-    .message({ "any.required": "Name is required" }),
+    .messages({ "any.required": "Name is required" }),
   stockTotal: Joi.number()
     .positive()
     .required()
-    .message({ "any.required": "Number is required" }),
+    .messages({ "any.required": "Number is required" }),
   categoryId: Joi.number()
     .required()
-    .message({ "any.required": "Id is required" }),
+    .messages({ "any.required": "Id is required" }),
   pricePerDay: Joi.number()
     .positive()
     .required()
-    .message({ "any.required": "Number is required" }),
+    .messages({ "any.required": "Number is required" }),
 });
 
 const rentalsSchema = Joi.object({
   customerId: Joi.number()
     .required()
-    .message({ "any.required": "Id is required" }),
-  gameId: Joi.number().required().message({ "any.required": "Id is required" }),
+    .messages({ "any.required": "Id is required" }),
+  gameId: Joi.number()
+    .required()
+    .messages({ "any.required": "Id is required" }),
   daysRented: Joi.number()
     .required()
-    .message({ "any.required": "DaysRented is required" }),
+    .messages({ "any.required": "DaysRented is required" }),
 });
 
 const categoriesValidation = validator(categoriesSchema);

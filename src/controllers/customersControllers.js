@@ -1,5 +1,3 @@
-import db from "../database/db.js";
-
 async function insertCustomer(req, res) {}
 
 async function listCustomers(req, res) {}

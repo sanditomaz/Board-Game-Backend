@@ -1,5 +1,3 @@
-import db from "../database/db.js";
-
 async function insertRent(req, res) {}
 
 async function listRent(req, res) {}
