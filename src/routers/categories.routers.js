@@ -1,9 +1,11 @@
 import express from "express";
-import * as categoryController from "../controllers/categoriesControllers.js";
+import { insertCategory } from "../controllers/categoriesControllers.js";
+import { listCategories } from "../controllers/categoriesControllers.js";
+import { categoryValidator } from "../middlewares/categoriesMiddleware.js";
 
 const router = express.Router();
 
-router.post("/categories", categoryController.insertCategory);
-router.get("/categories", categoryController.listCategories);
+router.post("/categories", categoryValidator, insertCategory);
+router.get("/categories", listCategories);
 
 export default router;
