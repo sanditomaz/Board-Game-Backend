@@ -7,12 +7,17 @@ async function insertCategory(req, res) {
     name,
   ]);
 
-  console.log(name);
-  res.send("oksss");
+  res.sendStatus(201);
 }
 
 async function listCategories(req, res) {
-  res.send("ya");
+  try {
+    const categoryList = await connection.query("SELECT * FROM categories");
+
+    res.send(categoryList.rows);
+  } catch (error) {
+    res.sendStatus(500);
+  }
 }
 
 export { insertCategory, listCategories };
