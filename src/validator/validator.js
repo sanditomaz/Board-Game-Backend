@@ -37,8 +37,9 @@ const gamesSchema = Joi.object({
     "any.required": "Name is required",
   }),
   image: Joi.string()
+    .uri()
     .required()
-    .messages({ "any.required": "Name is required" }),
+    .messages({ "any.required": "Url is required" }),
   stockTotal: Joi.number()
     .positive()
     .required()
@@ -49,7 +50,7 @@ const gamesSchema = Joi.object({
   pricePerDay: Joi.number()
     .positive()
     .required()
-    .messages({ "any.required": "Number is required" }),
+    .messages({ "any.required": "Price is required" }),
 });
 
 const rentalsSchema = Joi.object({
