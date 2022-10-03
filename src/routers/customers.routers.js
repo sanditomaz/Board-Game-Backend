@@ -4,12 +4,13 @@ import { listCustomers } from "../controllers/customersControllers.js";
 import { searchCustomer } from "../controllers/customersControllers.js";
 import { updateCustomer } from "../controllers/customersControllers.js";
 import { customerValidator } from "../middlewares/customersMiddleware.js";
+import { updateValidator } from "../middlewares/customersMiddleware.js";
 
 const router = express.Router();
 
 router.post("/customers", customerValidator, insertCustomer);
 router.get("/customers", listCustomers);
 router.get("/customers/:id", searchCustomer);
-router.put("/customers/:id", customerValidator, updateCustomer);
+router.put("/customers/:id", updateValidator, updateCustomer);
 
 export default router;
