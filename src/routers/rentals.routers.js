@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post("/rentals", rentValidator, insertRent);
 router.get("/rentals", listRent);
-router.post("/rentals/:id/return", rentValidator, setRent);
+router.post("/rentals/:id/return", setRent);
 router.delete("/rentals/:id", deleteRent);
 
 export default router;

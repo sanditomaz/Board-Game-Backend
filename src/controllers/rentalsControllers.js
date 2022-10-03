@@ -73,7 +73,33 @@ async function listRent(req, res) {
   }
 }
 
-async function setRent(req, res) {}
+async function setRent(req, res) {
+  const { id } = req.params;
+
+  try {
+    const checkId = await connection.query(
+      `SELECT * FROM rentals WHERE id = ($1);`,
+      [id]
+    );
+
+    if (checkId.rows.length === 0) {
+      return res.status(404).send("Invalid Id");
+    }
+
+    if (checkId.rows[0].returnDate !== null) {
+      return res.status(400).send("Already returned");
+    }
+
+    const returnDate = dayjs().format("YYYY-MM-DD");
+
+    await connection.query(`INSERT INTO rentals ("returnDate") VALUES ($1);`, [
+      returnDate,
+    ]);
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+}
 
 async function deleteRent(req, res) {
   const { id } = req.params;
