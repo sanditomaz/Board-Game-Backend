@@ -9,8 +9,11 @@ const customerValidator = async (req, res, next) => {
   if (validate.error) {
     const errors = validate.error.details.map((detail) => detail.message);
     res.status(400).send(errors);
+
     return;
   }
+
+  console.log(validate.error);
 
   try {
     const { cpf } = req.body;

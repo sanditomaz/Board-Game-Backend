@@ -52,7 +52,7 @@ async function searchCustomer(req, res) {
 
 async function updateCustomer(req, res) {
   const { name, phone, cpf, birthday } = req.body;
-  const { id } = req.query;
+  const { id } = req.params;
 
   try {
     const customer = await connection.query(

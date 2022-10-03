@@ -25,7 +25,7 @@ const customersSchema = Joi.object({
   }),
   birthday: Joi.date().less("now").greater("01-01-1900").required().messages({
     "date.less": "Birthday should be before today",
-    "date.greater": "Birthday should be over 01-01-1900",
+    "date.greater": "Birthday should be over 01/01/1900",
     "any.required": "Birthday is required",
   }),
 });
