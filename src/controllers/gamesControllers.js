@@ -12,9 +12,19 @@ async function insertGame(req, res) {
 }
 
 async function listGames(req, res) {
-  try {
-    const gamesList = await connection.query("SELECT * FROM games");
+  const { name } = req.query;
+  let gamesList;
 
+  try {
+    if (name) {
+      gamesList = await connection.query(
+        `SELECT games.* , categories.name AS "categoryName" FROM games JOIN categories ON games."categoryId" = categories.id WHERE games.name ILIKE '${name}%';`
+      );
+    } else {
+      gamesList = await connection.query(
+        `SELECT games.* , categories.name AS "categoryName" FROM games JOIN categories ON games."categoryId" = categories.id;`
+      );
+    }
     res.send(gamesList.rows);
   } catch (error) {
     res.sendStatus(500);
